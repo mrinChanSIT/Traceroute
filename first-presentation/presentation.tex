@@ -1,7 +1,11 @@
 \documentclass{beamer}
+\usepackage{multimedia}
+\usepackage{graphicx}
 
 \usetheme{Antibes}
 \usecolortheme{beaver}
+\hypersetup{colorlinks=true, urlcolor=red}
+
 
 \title{Group 6: Traceroute Optimization}
 \author{Mrinal Chandra Vinoth Kumar, Rafael Sanchez, Artur Shum}
@@ -15,10 +19,10 @@
 \begin{frame}
 \frametitle{Overview}
 
-Traceroute typically spews out results as a somewhat-formatted table of
-raw data. We aim to build on top of the basic \texttt{tracert} algorithm
-to expand its functionality and hopefully provide deeper insight
-into the path of the packets.
+Traceroute typically spews out a poorly-formatted table of 
+opaque raw data. We aim to build on top of the basic \texttt{tracert} algorithm,
+make it look better, expand its functionality, and hopefully provide deeper insight
+into the path of the packets as well as the health of the nodes along the path.
 
 \end{frame}
 
@@ -34,19 +38,20 @@ into the path of the packets.
 \begin{frame}
 \frametitle{RTT Analysis}
 
-As we did in the second assignment, we could provide insight regarding
-the numerical distribution of roundtrip time such as standard deviation,
-mean, as well as further numerical analyses as time allows.
+Similarly to the second assignment, we will provide insight regarding
+the numerical distribution of roundtrip times such as standard deviation,
+mean, as well as further numerical analyses as time allows. Additionally,
+further control over the frequency, count of pings, TTL, and hop numbers
+will be given to the user.
 
 \end{frame}
 
 \begin{frame}
 \frametitle{Path Analysis}
 
-Since the packets may take varied paths throughout the day, another feature
-idea is to schedule \texttt{tracert} calls at given intervals of the day,
-providing a succinct view of the difference in paths as well as any
-nodes previously seen that were noticed to have gone offline.
+Since the packets may take varied paths throughout the day, storing data regarding
+the jumps to be compared later against previous runs will help analyze the health
+of the nodes along the typical path to a destination. 
 
 \end{frame}
 
@@ -55,14 +60,19 @@ nodes previously seen that were noticed to have gone offline.
 \frametitle{Output Formatting Options}
 
 To amend \texttt{tracert}'s poorly formatted output, output format options 
-could be provided to lend the output data to further analysis at the user's choice.
-Some variants of output could be \texttt{.csv/.tsv} files and the 
-grouping of columns could be varied with a flag as well.
+will be provided to lend the output data to further analysis at the user's choice.
+Some variants of output will be \texttt{.csv/.tsv} files and the 
+grouping of columns will be variable via an argument as well.
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{Code Example}
+  \frametitle{Links}
+
+  \begin{itemize}
+  \item \href{http://youtu.be/Z2_QqqkHR54}{\underline{Prototype Traceroute Program with GUI Demo}}
+  \item \href{http://github.com/mrinchanSIT/Traceroute}{\underline{\texttt{mrinchanSIT/Traceroute} on Github}}
+  \end{itemize}
 \end{frame}
 
 
