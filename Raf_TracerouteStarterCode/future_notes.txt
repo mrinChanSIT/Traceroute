@@ -1,0 +1,17 @@
+What we plan to do in the future:
+ 
+ - add a "compare" feature where different values are compared with other ips 
+ 
+ - add a "summary" feature where total time, packet time (asterisks included), and time of day the packets were sent are shown to the user
+ 
+ - add a "compare different times for same ip" option where the ip's health is checked with other runs the program did of that host.
+ 
+ - add a log file for any errors and also to save different traceroute logs
+ 
+ - check that arguments provided are ok (error checking)
+ 
+ - refactor code so it's not as messy
+ 
+ - add threading to program so it doesnt just hang when performing pings
+ 
+ - write our own traceroute library if time allows
