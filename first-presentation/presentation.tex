@@ -1,0 +1,69 @@
+\documentclass{beamer}
+
+\usetheme{Antibes}
+\usecolortheme{beaver}
+
+\title{Group 6: Traceroute Optimization}
+\author{Mrinal Chandra Vinoth Kumar, Rafael Sanchez, Artur Shum}
+\institute{Stevens Institute of Technology}
+\date{6 October 2022}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Overview}
+
+Traceroute typically spews out results as a somewhat-formatted table of
+raw data. We aim to build on top of the basic \texttt{tracert} algorithm
+to expand its functionality and hopefully provide deeper insight
+into the path of the packets.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Feature Ideas}
+\begin{itemize}
+  \item RTT Analysis
+  \item Path Analysis
+  \item Output Formatting Options
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{RTT Analysis}
+
+As we did in the second assignment, we could provide insight regarding
+the numerical distribution of roundtrip time such as standard deviation,
+mean, as well as further numerical analyses as time allows.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Path Analysis}
+
+Since the packets may take varied paths throughout the day, another feature
+idea is to schedule \texttt{tracert} calls at given intervals of the day,
+providing a succinct view of the difference in paths as well as any
+nodes previously seen that were noticed to have gone offline.
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Output Formatting Options}
+
+To amend \texttt{tracert}'s poorly formatted output, output format options 
+could be provided to lend the output data to further analysis at the user's choice.
+Some variants of output could be \texttt{.csv/.tsv} files and the 
+grouping of columns could be varied with a flag as well.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Code Example}
+\end{frame}
+
+
+\end{document}
