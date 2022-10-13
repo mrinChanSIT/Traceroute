@@ -1,0 +1,295 @@
+[2022-10-13 16:27:01] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 4.664 ms
+02             10.240.160.57 -> 12.465 ms
+03             67.59.232.134 -> 11.568 ms
+04             67.83.243.4 -> 13.682 ms
+05             67.59.251.64 -> 17.882 ms
+06             65.19.120.222 -> 15.968 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 18.909 ms
+[2022-10-13 16:27:05] Average rtt for 1.1.1.1
+
+13.591142857142858
+[2022-10-13 16:30:52] Traceroute for google.com
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 2.793 ms
+02             10.240.160.57 -> 15.007 ms
+03             67.59.232.124 -> 12.785 ms
+04             67.83.243.2 -> 14.764 ms
+05             67.59.251.74 -> 15.626 ms
+06             64.15.6.2 -> 18.045 ms
+07             72.14.215.203 -> 19.46 ms
+08             142.250.63.91 -> 19.708 ms
+09             142.251.64.5 -> 19.105 ms
+10             142.251.35.174 -> 17.756 ms
+[2022-10-13 16:30:54] Average rtt for google.com
+
+15.504900000000001
+[2022-10-13 16:31:16] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 4.329 ms
+02             10.240.160.57 -> 26.31 ms
+03             67.59.232.134 -> 15.19 ms
+04             67.83.243.4 -> 16.916 ms
+05             67.59.251.64 -> 20.539 ms
+06             65.19.120.222 -> 24.759 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 16.271 ms
+[2022-10-13 16:31:19] Average rtt for 1.1.1.1
+
+17.75914285714286
+[2022-10-13 17:01:55] Error: no hosts provided.
+[2022-10-13 17:02:05] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 6.145 ms
+02             10.240.160.57 -> 15.288 ms
+03             67.59.232.134 -> 13.178 ms
+04             67.83.243.4 -> 21.076 ms
+05             67.59.251.64 -> 27.669 ms
+06             65.19.120.222 -> 30.353 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 23.671 ms
+[2022-10-13 17:02:09] Average rtt for 1.1.1.1
+
+19.625714285714285
+[2022-10-13 17:02:16] Time-Of-Day to Averages Table16:30:25                       16.816
+16:31:19                       17.75914285714286
+17:02:09                       19.625714285714285
+[2022-10-13 17:03:00] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 12.199 ms
+02             10.240.160.57 -> 12.946 ms
+03             67.59.232.134 -> 12.832 ms
+04             67.83.243.4 -> 15.693 ms
+05             67.59.251.64 -> 24.32 ms
+06             65.19.120.222 -> 16.36 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 18.776 ms
+[2022-10-13 17:03:04] Time-Of-Day to Averages Table
+16:30:25                       16.816
+16:31:19                       17.75914285714286
+17:02:09                       19.625714285714285
+[2022-10-13 17:03:11] Average rtt for 1.1.1.1
+
+16.160857142857143
+[2022-10-13 17:03:12] Time-Of-Day to Averages Table
+16:30:25                       16.816
+16:31:19                       17.75914285714286
+17:02:09                       19.625714285714285
+17:03:11                       16.160857142857143
+[2022-10-13 17:06:06] Error: no hosts provided.
+[2022-10-13 17:06:09] Error: no host provided.
+[2022-10-13 17:06:10] Error: no host provided.
+[2022-10-13 17:06:16] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 5.339 ms
+02             10.240.160.57 -> 13.68 ms
+03             67.59.232.134 -> 13.675 ms
+04             67.83.243.4 -> 17.59 ms
+05             67.59.251.64 -> 17.441 ms
+06             65.19.120.222 -> 18.219 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 25.734 ms
+[2022-10-13 17:06:23] Time-Of-Day to Averages Table for 1.1.1.1
+16:30:25                       16.816
+16:31:19                       17.75914285714286
+17:02:09                       19.625714285714285
+17:03:11                       16.160857142857143
+[2022-10-13 13:11:09] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 3.753 ms
+02             10.240.160.57 -> 18.993 ms
+03             67.59.232.134 -> 13.955 ms
+04             67.83.243.4 -> 21.893 ms
+05             67.59.251.64 -> 21.674 ms
+06             65.19.120.222 -> 18.696 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 18.136 ms
+[2022-10-13 13:11:10] Average rtt for 1.1.1.1
+
+16.728571428571428
+[2022-10-13 13:11:12] Time-Of-Day to Averages Table for 1.1.1.1
+16:30:25                       16.816
+16:31:19                       17.75914285714286
+17:02:09                       19.625714285714285
+17:03:11                       16.160857142857143
+13:11:10                       16.728571428571428
+[2022-10-13 13:15:49] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 4.21 ms
+02             10.240.160.57 -> 15.653 ms
+03             67.59.232.134 -> 13.081 ms
+04             67.83.243.4 -> 13.921 ms
+05             67.59.251.64 -> 15.278 ms
+06             65.19.120.222 -> 14.805 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 14.524 ms
+[2022-10-13 13:15:54] Traceroute for google.com
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 3.552 ms
+02             10.240.160.57 -> 17.561 ms
+03             67.59.232.124 -> 15.865 ms
+04             67.83.243.0 -> 13.993 ms
+05             67.59.251.72 -> 15.836 ms
+06             64.15.0.72 -> 16.226 ms
+07             72.14.215.203 -> 17.641 ms
+08             142.251.67.163 -> 15.19 ms
+09             142.251.65.103 -> 14.462 ms
+10             142.250.80.78 -> 16.826 ms
+[2022-10-13 13:15:56] Average rtt for google.com
+
+14.7152
+[2022-10-13 13:16:00] Time-Of-Day to Averages Table for google.com
+16:30:54                       15.504900000000001
+13:15:56                       14.7152
+[2022-10-13 13:32:07] Average rtt for 1.1.1.1
+
+17.407285714285717
+[2022-10-13 13:32:07] Standard Deviation of rtt's for 1.1.1.1
+
+6.933019296917366
+[2022-10-13 13:32:07] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 4.547 ms
+02             10.240.160.57 -> 16.334 ms
+03             67.59.232.134 -> 16.078 ms
+04             67.83.243.4 -> 26.65 ms
+05             67.59.251.64 -> 18.517 ms
+06             65.19.120.222 -> 23.132 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 16.593 ms
+[2022-10-13 13:42:06] Error: no hosts provided.
+[2022-10-13 13:42:15] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 2.795 ms
+02             10.240.160.57 -> 13.005 ms
+03             67.59.232.134 -> 12.847 ms
+04             67.83.243.4 -> 15.822 ms
+05             67.59.251.64 -> 15.786 ms
+06             65.19.120.222 -> 21.848 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 22.914 ms
+[2022-10-13 13:42:20] Time-Of-Day,    Averages,    Standard Deviation Table for 1.1.1.1
+13:42:15 ---> 15.002    6.688
+[2022-10-13 13:42:58] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 3.322 ms
+02             10.240.160.57 -> 11.767 ms
+03             67.59.232.134 -> 11.316 ms
+04             67.83.243.4 -> 13.542 ms
+05             67.59.251.64 -> 25.654 ms
+06             65.19.120.222 -> 16.513 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 15.391 ms
+[2022-10-13 13:43:01] Time-Of-Day, Averages, Standard Deviation Table for 1.1.1.1
+13:42:15 ---> 15.002    6.688
+13:42:58 ---> 13.929    6.714
+[2022-10-13 14:26:40] Error: no host provided.
+[2022-10-13 14:26:42] Error: no hosts provided.
+[2022-10-13 14:26:44] Error: no host provided.
+[2022-10-13 14:26:50] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 3.397 ms
+02             10.240.160.57 -> 16.102 ms
+03             67.59.232.134 -> 11.189 ms
+04             67.83.243.4 -> 19.322 ms
+05             67.59.251.64 -> 15.545 ms
+06             65.19.120.222 -> 15.377 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 14.045 ms
+[2022-10-13 14:26:56] Average rtt for 1.1.1.1
+
+13.568142857142856
+[2022-10-13 14:27:01] Standard Deviation of rtt's for 1.1.1.1
+
+5.0997890946120314
+[2022-10-13 14:27:13] Traceroute for google.com
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 15.103 ms
+02             10.240.160.57 -> 14.408 ms
+03             67.59.235.208 -> 12.956 ms
+04             67.83.243.2 -> 14.105 ms
+05             67.59.251.74 -> 14.875 ms
+06             64.15.6.8 -> 15.345 ms
+**             Some Gateways are not responding
+09             142.251.65.109 -> 13.867 ms
+10             142.250.176.206 -> 20.114 ms
+[2022-10-13 14:27:18] Average rtt for google.com
+
+15.096625000000001
+[2022-10-13 14:27:20] Standard Deviation of rtt's for google.com
+
+2.165861025583788
+[2022-10-13 14:27:32] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 5.159 ms
+02             10.240.160.57 -> 11.966 ms
+03             67.59.232.134 -> 12.335 ms
+04             67.83.243.4 -> 20.787 ms
+05             67.59.251.64 -> 17.438 ms
+06             65.19.120.222 -> 17.588 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 15.459 ms
+[2022-10-13 14:27:39] Traceroute for 1.1.1.1
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 4.149 ms
+02             10.240.160.57 -> 12.903 ms
+03             67.59.232.134 -> 10.12 ms
+04             67.83.243.4 -> 15.413 ms
+05             67.59.251.64 -> 18.541 ms
+06             65.19.120.222 -> 15.338 ms
+**             Some Gateways are not responding
+09             1.1.1.1 -> 15.737 ms
+[2022-10-13 14:27:46] Time-Of-Day, Averages, Standard Deviation Table for 1.1.1.1
+13:42:15 -------> 15.002    6.688
+13:42:58 -------> 13.929    6.714
+13:45:15 -------> 17.250    6.154
+14:26:50 -------> 13.568    5.100
+14:27:32 -------> 14.390    5.114
+14:27:39 -------> 13.172    4.760
+[2022-10-13 14:28:11] Traceroute for google.com
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 6.022 ms
+02             10.240.160.57 -> 12.442 ms
+03             67.59.232.124 -> 232.042 ms
+04             67.83.243.0 -> 15.009 ms
+05             67.59.239.119 -> 17.924 ms
+06             65.19.120.210 -> 14.044 ms
+**             Some Gateways are not responding
+09             142.251.53.149 -> 16.277 ms
+10             142.251.41.14 -> 15.128 ms
+[2022-10-13 14:28:14] Time-Of-Day, Averages, Standard Deviation Table for google.com
+14:27:13 -------> 15.097    2.166
+14:28:11 -------> 41.111    77.230
+[2022-10-13 14:28:42] Traceroute for google.com
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 2.982 ms
+02             10.240.160.57 -> 11.414 ms
+03             67.59.232.124 -> 10.543 ms
+04             67.83.243.0 -> 12.634 ms
+05             67.59.239.119 -> 15.298 ms
+06             65.19.120.210 -> 14.926 ms
+**             Some Gateways are not responding
+09             142.251.53.149 -> 13.082 ms
+10             142.251.41.14 -> 15.957 ms
+[2022-10-13 14:28:45] Time-Of-Day, Averages, Standard Deviation Table for google.com
+14:27:13 -------> 15.097    2.166
+14:28:11 -------> 41.111    77.230
+14:28:42 -------> 12.104    4.147
+[2022-10-13 14:28:57] Traceroute for google.com
+Distance/TTL   Address -> Average round-trip time
+01             192.168.1.1 -> 6.506 ms
+02             10.240.160.57 -> 15.473 ms
+03             67.59.232.124 -> 13.352 ms
+04             67.83.243.0 -> 16.946 ms
+05             67.59.239.119 -> 16.058 ms
+06             65.19.120.210 -> 15.26 ms
+**             Some Gateways are not responding
+09             142.251.53.149 -> 14.817 ms
+10             142.251.41.14 -> 16.888 ms
+[2022-10-13 14:29:01] Time-Of-Day, Averages, Standard Deviation Table for google.com
+14:27:13 -------> 15.097    2.166
+14:28:11 -------> 41.111    77.230
+14:28:42 -------> 12.104    4.147
+14:28:57 -------> 14.413    3.400

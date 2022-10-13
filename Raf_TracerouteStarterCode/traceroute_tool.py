@@ -1,10 +1,13 @@
 from icmplib import traceroute
 from tkinter import *
 import statistics as s
+from time import gmtime, strftime
+import json
 
 # Init window and gui
 root = Tk()
 root.title('Traceroute Program')
+root.config(background="LIGHT GRAY")
 root.geometry("1280x720")
 root.resizable(False, False)
 
@@ -40,8 +43,8 @@ max_hops_e.insert(0, "20")
 max_hops_e.place(x=570, y=679)
 
 # Display the main view of the program
-displayed_message="--------------------------------- TRACEROUTE PROGRAM ---------------------------------\n"
-abel = Text(root,width=88,height=23, font=('Courier', 18, 'bold'), bg="WHITE",fg="BLACK", borderwidth=5, relief="ridge")
+displayed_message="---------------------- TRACEROUTE PROGRAM --------------------------\n>>> "
+abel = Text(root,width=68,height=23, font=('Courier', 18, 'bold'), bg="LIGHT YELLOW",fg="BLACK", borderwidth=5, relief="ridge")
 abel.insert(END, displayed_message)
 abel.place(x=10, y=5)
 
@@ -49,29 +52,77 @@ abel.place(x=10, y=5)
 avg_rtt_list = []
 current_host = ""
 
-# Insert text to gui
+# open log file for reading and appending any new info at the end
+logfile = open("log.txt", "a+")
+
+# Insert text to gui AND add finding to log file
 def print_to_gui(widget: Text, _text):
-    widget.insert(END, "\n>>> "+_text)
+    widget.insert(END, _text+"\n>>> ")
+    t = strftime("%Y-%m-%d %H:%M:%S")
+    logfile.write(f"[{t}] "+_text)
+
+# updates json file with correct ip and the average times
+def update_json(ip, avg, std):
+    with open("ips.json", "r+") as jsonFile:
+        data = json.load(jsonFile)
+
+        time_of_day = strftime("%H:%M:%S")
+        if ip in data:
+            data[ip].append([time_of_day, avg, std])
+        else:
+            data[ip] = []
+            data[ip].append([time_of_day, avg, std])
+        jsonFile.seek(0)
+        json.dump(data, jsonFile)
+        jsonFile.truncate()
 
 # Calculate the average of all round trips
-def calculate_avg():
+def calculate_avg(should_print=True):
     if avg_rtt_list==[]:
         print_to_gui(abel, f"Error: no host provided.\n")
     else:    
-        print_to_gui(abel, f"Average rtt for {current_host}\n\n{sum(avg_rtt_list)/len(avg_rtt_list)}\n")
-
-avg_button = Button(root, text ="calculate average", command = calculate_avg, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
-avg_button.place(x=670,y=679)
+        avg = sum(avg_rtt_list)/len(avg_rtt_list)
+        if should_print:
+            print_to_gui(abel, f"Average rtt for {current_host}\n\n{avg}\n")
+        return avg
 
 # Calculate the standard deviation
-def calculate_sd():
+def calculate_sd(should_print=True):
     if avg_rtt_list==[]:
         print_to_gui(abel, f"Error: no host provided.\n")
     else:
-        print_to_gui(abel, f"Standard Deviation of rtt's for {current_host}\n\n{s.stdev(avg_rtt_list)}\n")
+        st = s.stdev(avg_rtt_list)
+        if should_print:
+            print_to_gui(abel, f"Standard Deviation of rtt's for {current_host}\n\n{st}\n")
+        return st
 
-sd_button = Button(root, text ="calculate stdev", command = calculate_sd, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
-sd_button.place(x=870,y=679)
+# compare averages and standardDevs with previous runs
+def show_avg_std_times_table():
+    with open("ips.json", "r+") as jsonFile:
+        data = json.load(jsonFile)
+    
+    if current_host=='':
+        print_to_gui(abel, "Error: no hosts provided.\n")
+        return
+
+    gui_msg = f"Time-Of-Day, Averages, Standard Deviation Table for {current_host}\n"
+    times_avarages_list = data[current_host]
+    for time_avg_std in times_avarages_list:
+        avg = format(time_avg_std[1], ".3f")
+        std = format(time_avg_std[2], ".3f")
+        gui_msg += f"{time_avg_std[0]} -------> {avg}    {std}\n"
+    print_to_gui(abel, gui_msg)
+
+# place the buttons
+avg_button = Button(root, text ="calculate\naverage", command = calculate_avg, height=3, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
+avg_button.place(x=1000,y=10)
+
+sd_button = Button(root, text ="calculate\nstandard\ndeviation", height=3 , command = calculate_sd, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
+sd_button.place(x=1000,y=90)
+
+times_comp_button = Button(root, text ="compare\ntimes", height=3, command = show_avg_std_times_table, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
+times_comp_button.place(x=1000,y=170)
+
 
 # Heart of the traceroute algorithm
 def PressedEnter():
@@ -93,6 +144,7 @@ def PressedEnter():
             gui_mes = gui_mes + f'{formatted_hop}             {hop.address} -> {hop.avg_rtt} ms\n'
             avg_rtt_list.append(hop.avg_rtt)
         last_distance = hop.distance
+    update_json(current_host, calculate_avg(False), calculate_sd(False))
     e.delete(0, END)
     print_to_gui(abel, gui_mes)
 
@@ -101,8 +153,9 @@ def func(event):
 
 root.bind('<Return>', func)
 
-# Close the window
+# Close the window and log file
 def on_closing():
+    logfile.close()
     root.destroy()
 
 def endit(event):

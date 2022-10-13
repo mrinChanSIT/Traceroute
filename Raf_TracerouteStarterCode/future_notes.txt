@@ -1,17 +1,15 @@
 What we plan to do in the future:
  
- - add a "compare" feature where different values are compared with other ips 
+ - add a "summary chart" feature where total time, packet time (asterisks included), and time of day the packets were sent are shown to the user, with several details of the run
  
- - add a "summary" feature where total time, packet time (asterisks included), and time of day the packets were sent are shown to the user
+ - order the compare different times from busiest to least busy so user can easily see when the network was at its fastest during that time of day, also the oposite way
  
- - add a "compare different times for same ip" option where the ip's health is checked with other runs the program did of that host.
+ - count the number of asterisks and that address so we know usually in a network what address drops the packets
  
- - add a log file for any errors and also to save different traceroute logs
+ - keep track of the servers the packets were sent to and trace what countries those are, showing the places in the world the packet is travelling
  
+Nice to do:
  - check that arguments provided are ok (error checking)
- 
  - refactor code so it's not as messy
- 
  - add threading to program so it doesnt just hang when performing pings
- 
  - write our own traceroute library if time allows
