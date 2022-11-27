@@ -42,6 +42,24 @@ max_hops_e = Entry(root, width=5, borderwidth=5, font=('Courier', 15, 'bold'))
 max_hops_e.insert(0, "20")
 max_hops_e.place(x=570, y=679)
 
+fhops_label = Label(root, text="first hop", width=10, font=('Courier', 10, 'bold'),borderwidth=2, relief="ridge")
+fhops_label.place(x=660, y=657)
+fhops_e = Entry(root, width=5, borderwidth=5, font=('Courier', 15, 'bold'))
+fhops_e.insert(0, "1")
+fhops_e.place(x=670, y=679)
+
+fast_label = Label(root, text="fast", width=10, font=('Courier', 10, 'bold'),borderwidth=2, relief="ridge")
+fast_label.place(x=760, y=657)
+fast_e = Entry(root, width=5, borderwidth=5, font=('Courier', 15, 'bold'))
+fast_e.insert(0, "0")
+fast_e.place(x=770, y=679)
+
+fam_label = Label(root, text="family", width=10, font=('Courier', 10, 'bold'),borderwidth=2, relief="ridge")
+fam_label.place(x=860, y=657)
+fam_e = Entry(root, width=5, borderwidth=5, font=('Courier', 15, 'bold'))
+fam_e.insert(0, "4")
+fam_e.place(x=870, y=679)
+
 # Display the main view of the program
 displayed_message="---------------------- TRACEROUTE PROGRAM --------------------------\n>>> "
 abel = Text(root,width=68,height=23, font=('Courier', 18, 'bold'), bg="LIGHT YELLOW",fg="BLACK", borderwidth=5, relief="ridge")
@@ -52,6 +70,17 @@ abel.place(x=10, y=5)
 avg_rtt_list = []
 current_host = ""
 
+# Important for showing which average in 2d lists is fastest
+def sort_averages(sub_li):
+    l = len(sub_li)
+    for i in range(0, l):
+        for j in range(0, l-i-1):
+            if (sub_li[j][1] > sub_li[j + 1][1]):
+                tempo = sub_li[j]
+                sub_li[j]= sub_li[j + 1]
+                sub_li[j + 1]= tempo
+    return sub_li
+
 # open log file for reading and appending any new info at the end
 logfile = open("log.txt", "a+")
 
@@ -61,8 +90,8 @@ def print_to_gui(widget: Text, _text):
     t = strftime("%Y-%m-%d %H:%M:%S")
     logfile.write(f"[{t}] "+_text)
 
-# updates json file with correct ip and the average times
-def update_json(ip, avg, std):
+# updates json file with correct ip and the average times, and if there are any packages dropped we save their corresponding ip as well
+def update_json(ip, avg, std, drpPackets):
     with open("ips.json", "r+") as jsonFile:
         data = json.load(jsonFile)
 
@@ -75,6 +104,19 @@ def update_json(ip, avg, std):
         jsonFile.seek(0)
         json.dump(data, jsonFile)
         jsonFile.truncate()
+
+    with open("dropped.json", "r+") as jsonFile1:
+        dataDropped = json.load(jsonFile1)
+
+        if ip in dataDropped:
+            dataDropped[ip] = [*set(dataDropped[ip] + drpPackets)] #eliminates duplicates
+        elif drpPackets!=[]:
+            dataDropped[ip] = drpPackets
+        else:
+            return
+        jsonFile1.seek(0)
+        json.dump(dataDropped, jsonFile1)
+        jsonFile1.truncate()
 
 # Calculate the average of all round trips
 def calculate_avg(should_print=True):
@@ -107,10 +149,26 @@ def show_avg_std_times_table():
 
     gui_msg = f"Time-Of-Day, Averages, Standard Deviation Table for {current_host}\n"
     times_avarages_list = data[current_host]
+    times_avarages_list = sort_averages(times_avarages_list)
     for time_avg_std in times_avarages_list:
         avg = format(time_avg_std[1], ".3f")
         std = format(time_avg_std[2], ".3f")
         gui_msg += f"{time_avg_std[0]} -------> {avg}    {std}\n"
+    print_to_gui(abel, gui_msg)
+
+# This function will show the ips that usually drop packets
+def show_ips_dropped():
+    with open("dropped.json", "r+") as jsonFile:
+        data = json.load(jsonFile)
+    
+    if current_host=='':
+        print_to_gui(abel, "Error: no hosts provided.\n")
+        return
+
+    gui_msg = f"Hops with * for {current_host}\n"
+    ips_list = data[current_host]
+    for ip in ips_list:
+        gui_msg += f"{ip}\n"
     print_to_gui(abel, gui_msg)
 
 # place the buttons
@@ -123,19 +181,24 @@ sd_button.place(x=1000,y=90)
 times_comp_button = Button(root, text ="compare\ntimes", height=3, command = show_avg_std_times_table, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
 times_comp_button.place(x=1000,y=170)
 
+times_comp_button = Button(root, text ="show\ndropped", height=3, command = show_ips_dropped, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
+times_comp_button.place(x=1000,y=250)
 
 # Heart of the traceroute algorithm
 def PressedEnter():
     global avg_rtt_list
     global current_host
-    hops = traceroute(address=e.get(), count=int(count_ping.get()), interval=float(inter_e.get()), timeout=float(timeout_e.get()), max_hops=int(max_hops_e.get()))
+    hops = traceroute(address=e.get(), count=int(count_ping.get()), interval=float(inter_e.get()), timeout=float(timeout_e.get()), first_hop=int(fhops_e.get()),max_hops=int(max_hops_e.get()),fast=bool(int(fast_e.get())), family=int(fam_e.get()))
     current_host = e.get()
     avg_rtt_list = []
-    gui_mes = f'Traceroute for {e.get()}\nDistance/TTL   Address -> Average round-trip time\n'
+    gui_mes = ''
     last_distance = 0
+    last_addr = ''
+    dropped_packets = []
     for hop in hops:
         if last_distance + 1 != hop.distance:
             gui_mes = gui_mes + '**             Some Gateways are not responding\n'
+            dropped_packets.append(last_distance+1)
         else:
             if hop.distance < 10:
                 formatted_hop = '0' + str(hop.distance)
@@ -143,9 +206,11 @@ def PressedEnter():
                 formatted_hop = str(hop.distance)
             gui_mes = gui_mes + f'{formatted_hop}             {hop.address} -> {hop.avg_rtt} ms\n'
             avg_rtt_list.append(hop.avg_rtt)
-        last_distance = hop.distance
-    update_json(current_host, calculate_avg(False), calculate_sd(False))
+            last_addr = hop.address
+        last_distance = hop.distance    
+    update_json(current_host, calculate_avg(False), calculate_sd(False), dropped_packets)
     e.delete(0, END)
+    gui_mes = f'Traceroute for {last_addr}\nDistance/TTL   Address -> Average round-trip time\n' + gui_mes
     print_to_gui(abel, gui_mes)
 
 def func(event):
