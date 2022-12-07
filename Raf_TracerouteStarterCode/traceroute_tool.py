@@ -3,12 +3,16 @@ from tkinter import *
 import statistics as s
 from time import gmtime, strftime
 import json
+import requests
+import plotly.express as px
+import pandas as pd
+import csv
 
 # Init window and gui
 root = Tk()
 root.title('Traceroute Program')
 root.config(background="LIGHT GRAY")
-root.geometry("1280x720")
+root.geometry("1180x720")
 root.resizable(False, False)
 
 # Options Labels and Parameters
@@ -80,6 +84,45 @@ def sort_averages(sub_li):
                 sub_li[j]= sub_li[j + 1]
                 sub_li[j + 1]= tempo
     return sub_li
+
+# useful for extracting latitude and longitude of an ip addresses, and writing it the csv file
+def write_locations(ip_addresses):
+    csvfile = open('dataset.csv', 'w', newline='')
+    writer = csv.writer(csvfile)
+    writer.writerow(["Address", "Lat", "Long", "Listed"])
+    #df = pd.read_csv("dataset.csv")
+    i = 1
+    for ip in ip_addresses:
+        response = requests.get(f'https://ipapi.co/{ip}/json/').json()
+        row = [i, response.get("latitude"), response.get("longitude"), 125000]
+        writer.writerow(row)
+        i+=1
+
+# Show the different ip addresses in different parts of the world from the locations in the csv file
+def show_world_trace():
+    df = pd.read_csv("dataset.csv")
+    df.dropna(
+        axis=0,
+        how='any',
+        thresh=None,
+        subset=None,
+        inplace=True
+    )
+    color_scale = [(0, 'orange'), (1,'red')]
+    fig = px.scatter_mapbox(df, 
+                            lat="Lat", 
+                            lon="Long", 
+                            hover_name="Address", 
+                            hover_data=["Address", "Listed"],
+                            color="Listed",
+                            color_continuous_scale=color_scale,
+                            size="Listed",
+                            zoom=0, 
+                            height=800,
+                            width=800)
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.show()
 
 # open log file for reading and appending any new info at the end
 logfile = open("log.txt", "a+")
@@ -172,17 +215,25 @@ def show_ips_dropped():
     print_to_gui(abel, gui_msg)
 
 # place the buttons
-avg_button = Button(root, text ="calculate\naverage", command = calculate_avg, height=3, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
-avg_button.place(x=1000,y=10)
+offset = 145
+initial = 10
+wid = 10
+hei = 3
+letter_size = 18
+avg_button = Button(root, text ="calculate\naverage", command = calculate_avg, height=hei,width=wid, font=('Courier', letter_size, 'bold'),borderwidth=5, relief="raised")
+avg_button.place(x=1000,y=initial)
 
-sd_button = Button(root, text ="calculate\nstandard\ndeviation", height=3 , command = calculate_sd, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
-sd_button.place(x=1000,y=90)
+sd_button = Button(root, text ="calculate\nstandard\ndeviation", height=hei ,width=wid, command = calculate_sd, font=('Courier', letter_size, 'bold'),borderwidth=5, relief="raised")
+sd_button.place(x=1000,y=initial+offset)
 
-times_comp_button = Button(root, text ="compare\ntimes", height=3, command = show_avg_std_times_table, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
-times_comp_button.place(x=1000,y=170)
+times_comp_button = Button(root, text ="compare\ntimes", height=hei,width=wid, command = show_avg_std_times_table, font=('Courier', letter_size, 'bold'),borderwidth=5, relief="raised")
+times_comp_button.place(x=1000,y=initial+offset*2)
 
-times_comp_button = Button(root, text ="show\ndropped", height=3, command = show_ips_dropped, font=('Courier', 10, 'bold'),borderwidth=5, relief="raised")
-times_comp_button.place(x=1000,y=250)
+times_comp_button = Button(root, text ="show\ndropped", height=hei,width=wid, command = show_ips_dropped, font=('Courier', letter_size, 'bold'),borderwidth=5, relief="raised")
+times_comp_button.place(x=1000,y=initial+offset*3)
+
+world_button = Button(root, text ="WORLD\nTRACE", height=hei,width=wid, command = show_world_trace, font=('Courier', letter_size, 'bold'),borderwidth=5, relief="raised")
+world_button.place(x=1000,y=initial+offset*4)
 
 # Heart of the traceroute algorithm
 def PressedEnter():
@@ -195,6 +246,7 @@ def PressedEnter():
     last_distance = 0
     last_addr = ''
     dropped_packets = []
+    all_addrs = []
     for hop in hops:
         if last_distance + 1 != hop.distance:
             gui_mes = gui_mes + '**             Some Gateways are not responding\n'
@@ -207,8 +259,10 @@ def PressedEnter():
             gui_mes = gui_mes + f'{formatted_hop}             {hop.address} -> {hop.avg_rtt} ms\n'
             avg_rtt_list.append(hop.avg_rtt)
             last_addr = hop.address
+            all_addrs.append(hop.address)
         last_distance = hop.distance    
     update_json(current_host, calculate_avg(False), calculate_sd(False), dropped_packets)
+    write_locations(all_addrs)
     e.delete(0, END)
     gui_mes = f'Traceroute for {last_addr}\nDistance/TTL   Address -> Average round-trip time\n' + gui_mes
     print_to_gui(abel, gui_mes)
