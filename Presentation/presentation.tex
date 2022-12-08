@@ -7,10 +7,10 @@
 \hypersetup{colorlinks=true, urlcolor=red}
 
 
-\title{Group 6: Enriched Traceroute}
+\title{Group 6: Traceroute}
 \author{Mrinal Chandra Vinoth Kumar, Rafael Sanchez, Artur Shum}
 \institute{Stevens Institute of Technology}
-\date{6 October 2022}
+\date{8 December 2022}
 
 \begin{document}
 
@@ -19,60 +19,108 @@
 \begin{frame}
 \frametitle{Overview}
 
+\begin{columns}
+
+\column{0.5\textwidth}
 Traceroute typically spews out a poorly-formatted table of 
-opaque raw data. We aim to build on top of the basic \texttt{tracert} algorithm,
-make it look better, expand its functionality, and hopefully provide deeper insight
-into the path of the packets as well as the health of the nodes along the path.
+opaque raw data. We rebuilt the \texttt{tracert} program,
+expanded its functionality, added a GUI, and added options 
+that provide deeper insight into the paths of the packets.
+
+\column{0.4\textwidth}
+  \includegraphics[width=\textwidth]{media/tracert_out.png}
+
+\end{columns}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Feature Ideas}
+\frametitle{Features}
 \begin{itemize}
   \item RTT Analysis
-  \item Path Analysis
-  \item Output Formatting Options
-  \item Potential Optimizations
+  \item World Trace
+  \item Long-term Comparisons
+  \item Output Options
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{RTT Analysis}
 
-Similarly to the second assignment, we will provide insight regarding
-the numerical distribution of roundtrip times such as standard deviation,
-mean, as well as further numerical analyses as time allows. Additionally,
-further control over the frequency, count of pings, TTL, and hop numbers
-will be given to the user.
+A descriptive statistical summary of the roundtrip times for 
+a particular trace is output at the press of a button. Additionally,
+the hop numbers on which packets were dropped are displayed.
+
+\begin{center}
+  \includegraphics[width=0.6\textwidth]{media/stats.png}
+\end{center}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Path Analysis}
+\frametitle{World Trace}
 
-Since the packets may take varied paths throughout the day, storing data regarding
-the jumps to be compared later against previous runs will help analyze the health
-of the nodes along the typical path to a destination. 
+IPs visited during the trace are geolocated to form a map view of the 
+path taken. As a result, users can look at the route from a geographical
+perspective as opposed to the usual numeric outlook.
 
-\end{frame}
-
-\begin{frame}
-
-\frametitle{Output Formatting Options}
-
-To amend \texttt{tracert}'s poorly formatted output, output format options 
-will be provided to lend the output data to further analysis at the user's choice.
-Some variants of output will be \texttt{.csv/.tsv} files and the 
-grouping of columns will be variable via an argument as well.
+\begin{center}
+\includegraphics[width=0.4\textwidth]{media/worldtrace.png}
+\end{center}
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{Potential Optimizations}
+\frametitle{Long-term Comparisons}
 
-  Since \texttt{tracert} is a minimal program as is, it is unlikely we can make optimization the 
-  focus of the project. However, if time allows and we find areas where it can be improved,
-  we will also look to handle the route tracing task more efficiently.
+The updated traceroute program saves results for an IP each time a trace is performed.
+With subsequent runs over time, the user can get an overview of how the stats of the 
+trace change over a longer period.
+
+% Since the packets may take varied paths throughout the day, storing data regarding
+% the jumps to be compared later against previous runs will help analyze the health
+% of the nodes along the typical path to a destination. 
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{media/compare.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Output Options}
+
+In case the user wishes to look deeper into the results of the traces,
+information about the runs is saved in a \texttt{.csv} file, allowing
+for deeper statistical analyses if desired. This is an improvement over 
+the base \texttt{tracert} since the latter has no options to easily pipe
+results into other programs.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Potential Directions Forward}
+
+  \texttt{tracert} is already a minimal program, so core performance improvements
+  are unlikely. However, any depth of statistic analysis could be implemented 
+  from here on - the mean and standard deviation are only starting points.
+
+  Additionally, more robust support for saving and analyzing old traces could be added.
+
+  Finally, the web app currently used to display the World Trace could be moved
+  to be part of the GUI.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Technologies Used}
+
+\begin{itemize}
+  \item \texttt{icmplib} - Python implementation of ICM protocol
+  \item \texttt{tkinter} - GUI library
+  \item \texttt{pandas} - quick statistical operations
+  \item \texttt{requests} - used to convert IPs to locations
+\end{itemize}
 
 \end{frame}
 
@@ -80,12 +128,9 @@ grouping of columns will be variable via an argument as well.
   \frametitle{Links}
 
   \begin{itemize}
-  \item \href{http://youtu.be/Z2_QqqkHR54}{\underline{Prototype Traceroute Program with GUI Demo}}
+  \item \href{https://youtu.be/I2BpqN5PpAU}{\underline{GUI Traceroute Demo}}
   \item \href{http://github.com/mrinchanSIT/Traceroute}{\underline{\texttt{mrinchanSIT/Traceroute} on Github}}
   \end{itemize}
 \end{frame}
-
-
-
 
 \end{document}
